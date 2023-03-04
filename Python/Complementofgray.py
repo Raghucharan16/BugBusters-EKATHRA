@@ -1,17 +1,33 @@
-def complement_of_gray(gray):
-    # Convert Gray code to binary
-    binary = gray[0] + "".join([str(int(gray[i]) ^ int(gray[i-1])) for i in range(1, len(gray))])
-
-    # Compute bitwise complement of binary
-    complemented = "".join(["0" if bit == "1" else "1" for bit in binary])
-
-    # Convert complemented binary back to Gray code
-    gray_complement = complemented[0] + "".join([str(int(complemented[i]) ^ int(gray[i-1])) for i in range(1, len(complemented))])
-
-    return gray_complement
+import random
 t=int(input())
-while(t>0):
-    s=input()
-    ans=complement_of_gray(s)
-    print(ans+"\n")
+#print(t)
+while(t):
     t-=1
+    a=input()
+    b=[]
+    l=len(a)
+    x=int(a[0])
+    b.append(x)
+    for i in range(1,l):
+        y=int(a[i])
+        z=y^x
+        x=y
+        b.append(z)
+    for i in range(l):
+        if(b[i]==1):
+            b[i]=0
+        else:
+            b[i]=1
+    i=l-1
+    while(i>=0):
+        if(b[i]==0):
+            b[i]=l
+            break
+        else:
+            b[i]=0
+        i-=1
+    if (i == -1):
+        print('1',end='')
+    for i in range(l):
+        print(b[i],end='')
+    print()
